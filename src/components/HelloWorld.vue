@@ -1,151 +1,72 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-stage :config="configKonva">
+    <v-layer>
+      <v-rect
+        @mouseover="fillWithRects"
+        :config="configRect">
+      </v-rect>
+    </v-layer>
+    <v-layer :id="insideRect"> </v-layer>
+  </v-stage>
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
+var width = 800;
+var height = 800;
 
-    data: () => ({
-      ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-        },
-      ],
-    }),
-  }
+export default {
+  data() {
+    return {
+      insideRect: '#insideRect',
+      configKonva: {
+        width: width,
+        height: height,
+      },
+      configRect: {
+        x: width / 2,
+        y: height / 2,
+        width: width / 2,
+        height: height / 2,
+        fill: 'red',
+        stroke: 'black',
+        strokeWidth: 4,
+      },
+      layeredRect: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 50,
+        fill: 'blue',
+        stroke: 'black',
+        strokeWidth: 4,
+      },
+    };
+  },
+  methods: {
+    fillWithRects() {
+      console.log('hello');
+      /*  for (
+        let j = 0;
+        j * this.layeredRect.height < this.configRect.height;
+        j++
+      ) {
+        for (
+          let i = 0;
+          i * this.layeredRect.width < this.configRect.width;
+          i++
+        ) {
+          this.$refs.insideRect.innerHTML += `<v-rect :config={
+          x: ${100 * i},
+          y: ${100 * j},
+          width: 100,
+          height: 50,
+          fill: 'blue',
+          stroke: 'black',
+          strokeWidth: 4,
+        }`;
+        }
+      } */
+    },
+  },
+};
 </script>
